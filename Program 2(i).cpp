@@ -2,35 +2,38 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-int binarySearch (vector <int> & arr, int key){
-   int i = 0, j = arr.size() - 1;
-   while (i <= j){
-      int mid = (i + j)/2;
-      if (arr[mid] == key) return mid;
-      else if (arr[mid] < key) i = mid + 1;
-      else j = mid - 1;
-   }
-   return -1;
+
+// Question: Given a sorted array of positive integers containing few duplicate elements, design an algorithm and implement it using a program to find whether the given key element is present in the array or not. If present, then also find the number of copies of given key. (Time Complexity = O(log n))
+
+int firstOccurrence(vector<int> &arr, int target){
+	int i = 0, j = arr.size() - 1, ans = -1;
+	while (i <= j){
+		int mid = i + (j - i)/2;
+		if (arr[mid] >= target) {ans = mid; j = mid - 1;}
+		else i = mid + 1;
+	}
+	return (arr[ans] == target)? ans : -1;
 }
-int findCopies (vector <int> & arr, int keyIndex){
-  int key = arr[keyIndex];
-  int k = keyIndex, j = arr.size() - 1, count = 1;
-  while (k < j && arr[++k] == key) ++count;
-  k = keyIndex;
-  while (k >= 1 && arr[--k] == key) ++count;
-  return count;
+int lastOccurence(vector<int> &arr, int target){
+	int i = 0, j = arr.size() - 1, ans = -1;
+	while (i <= j){
+		int mid = i + (j - i)/2;
+		if (arr[mid] <= target) {ans = mid; i = mid + 1;}
+		else j = mid - 1;
+	}
+	return (arr[ans] == target)? ans : -1;
 }
+
 int main (){
-  int n;
-  cout<<"\nEnter number of elements : "; cin>>n;
-  vector <int> arr (n);
-  cout<<"Enter elements : "; 
-  for (int i = 0; i < n; ++i) cin>>arr[i];
-  sort(arr.begin(), arr.end());
-  int key;
-  cout<<"\nEnter the key to be searched : "; cin>>key;
-  int found = binarySearch(arr, key);
-  if (found != -1) cout<<"\n\tElement found with "<<findCopies(arr, found) <<" copies...\n";
-  else cout<<"\tElement not found...\n";
-  return 0;
+     int size, target;
+     cout<<"\nEnter no. of elements : "; cin>>size; 
+     cout<<"Enter elements : ";
+     vector <int> arr (size);
+     for (int i = 0; i < size; ++i) cin>>arr[i];
+     cout<<"Enter element to search : "; cin>>target;
+     //sort(arr.begin(), arr.end()); //If array is not already sorted use sort for binary search
+	int firstIndex = firstOccurrence(arr, target);
+	if (firstIndex == -1) cout<<"\nKey Not Found"<<endl;
+     else cout<<endl<<arr[firstIndex]<<" - "<<(lastOccurence(arr, target) - firstIndex) + 1<<endl;
+     return 0;
 }
