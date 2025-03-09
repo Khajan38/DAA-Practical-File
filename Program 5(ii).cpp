@@ -26,3 +26,16 @@ vector<int> twoSum(vector<int> &arr, int target){
 		else return {arr[i], arr[j]};
 	return {-1, -1};
 }
+
+int main(){
+	int size, target;
+     cout<<"\nEnter no. of elements : "; cin>>size; 
+     cout<<"Enter elements : ";
+     vector <int> arr (size);
+     for (int i = 0; i < size; ++i) cin>>arr[i];
+	cout<<"Enter the key : "; cin>>target;
+     vector <int> result = twoSum(arr, target);
+	if (result[0] == -1 && result[1] == -1) cout<<"\nNo Sequence found"<<endl;
+	else cout<<endl<<result[0]<<", "<<result[1]<<endl;
+	return 0;
+}

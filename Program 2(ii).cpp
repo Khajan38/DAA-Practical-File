@@ -27,7 +27,7 @@ vector <int> threeSum (vector <int> & arr){
 }
 
 int main(){
-	int size, target;
+	int size;
      cout<<"\nEnter no. of elements : "; cin>>size; 
      cout<<"Enter elements : ";
      vector <int> arr (size);
