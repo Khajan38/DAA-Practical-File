@@ -14,7 +14,7 @@ bool containDuplicates1 (vector <int> & arr){//Using Sorting
      return false;
 }
 
-bool containDuplicates2 (vector <int> & arr){//Using Sorting
+bool containDuplicates2 (vector <int> & arr){//Using Hashing
      unordered_set <int> hash;
      for (const int & i : arr) hash.insert(i);
      if (hash.size() == arr.size()) return false;
